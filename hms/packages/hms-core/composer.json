@@ -1,0 +1,12 @@
+{
+    "name": "hms/core",
+    "description": "Shared domain enums and constants for HMS",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hms\\Core\\": ""
+        }
+    },
+    "minimum-stability": "stable"
+}

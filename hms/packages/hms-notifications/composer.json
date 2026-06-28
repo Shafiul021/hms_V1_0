@@ -1,0 +1,12 @@
+{
+    "name": "hms/notifications",
+    "description": "Reusable notification channels and mail templates for HMS",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hms\\Notifications\\": ""
+        }
+    },
+    "minimum-stability": "stable"
+}

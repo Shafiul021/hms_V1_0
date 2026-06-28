@@ -1,0 +1,44 @@
+services:
+  php:
+    build: ./docker/php
+    volumes:
+      - .:/var/www/html
+    depends_on: [mysql, redis]
+
+  nginx:
+    build: ./docker/nginx
+    ports: ["80:80", "443:443"]
+    volumes:
+      - .:/var/www/html
+    depends_on: [php]
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: hms
+      MYSQL_ROOT_PASSWORD: secret
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  supervisor:
+    build: ./docker/php
+    command: /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+    volumes:
+      - .:/var/www/html
+      - ./docker/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
+      - ./docker/supervisor/horizon.conf:/etc/supervisor/conf.d/horizon.conf
+      - ./docker/supervisor/scheduler.conf:/etc/supervisor/conf.d/scheduler.conf
+    depends_on: [php, redis]
+
+volumes:
+  mysql_data:
+  redis_data:

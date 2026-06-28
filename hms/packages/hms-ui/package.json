@@ -1,0 +1,7 @@
+{
+    "name": "@hms/ui",
+    "version": "1.0.0",
+    "description": "Shared React UI primitives for HMS",
+    "main": "src/index.js",
+    "private": true
+}
